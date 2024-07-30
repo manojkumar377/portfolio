@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Certificate Flexbox</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+<style>
+  .container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    transition: all 0.5s;
+  }
+
+  .certificate {
+    border: 0px solid #ccc;
+    padding: 10px;
+    text-align: center;
+    width: 100%;
+    max-width: 370px;
+    transition: transform 0.3s;
+  }
+
+  .certificate img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  .filters {
+    text-align: center;
+    margin-bottom: 20px;
+    transition: all 0.5s;
+  }
+
+  .filter-button {
+    padding: 8px 16px;
+    margin: 0 5px;
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+  }
+
+  .filter-button:hover {
+    background-color: #e0e0e0;
+  }
+
+  .filter-button.active {
+    background-color: #007bff;
+    color: #fff;
+  }
+
+  @media (max-width: 768px) {
+    .certificate {
+      width: 100%;
+      max-width: 100%;
+    }
+  }
+</style>
+</head>
+<body>
+
+<div class="filters">
+  <button class="filter-button" data-filter="all">All</button>
+  <button class="filter-button" data-filter="non-security">Non-Security</button>
+  <button class="filter-button" data-filter="security">Security</button>
+  <button class="filter-button" data-filter="industry-certificate">Industry Certificate</button>
+</div>
+
+<div class="container">
+  <div class="certificate non-security"><img src="assets/img/portfolio/academor.jpg" alt="Certificate 1"></div>
+  <div class="certificate security"><img src="assets/img/portfolio/cisco.png" alt="Certificate 2"></div>
+  <div class="certificate non-security"><img src="assets/img/portfolio/Forage.jpeg" alt="Certificate 3"></div>
+  <div class="certificate industry-certificate"><img src="assets/img/portfolio/TCSION.png" alt="Certificate 4"></div>
+  <div class="certificate security"><img src="assets/img/portfolio/NullClass.png" alt="Certificate 5"></div>
+  <div class="certificate non-security"><img src="assets/img/portfolio/productivity.jpeg" alt="Certificate 6"></div>
+  <div class="certificate non-security"><img src="assets/img/portfolio/linux.jpg" alt="Certificate 5"></div>
+  <div class="certificate non-security"><img src="assets/img/portfolio/vesrad.jpg" alt="Certificate 6"></div>
+  <div class="certificate non-security"><img src="assets/img/portfolio/Iot.jpg" alt="Certificate 6"></div>
+</div>
+
+<script>
+  const filterButtons = document.querySelectorAll('.filter-button');
+  const certificates = document.querySelectorAll('.certificate');
+  const container = document.querySelector('.container');
+
+  filterButtons.forEach(button => {
+    button.addEventListener('click', () => {
+      const filter = button.getAttribute('data-filter');
+      
+      certificates.forEach(certificate => {
+        certificate.style.display = 'none';
+        if (certificate.classList.contains(filter) || filter === 'all') {
+          certificate.style.display = 'block';
+        }
+      });
+
+      filterButtons.forEach(btn => btn.classList.remove('active'));
+      button.classList.add('active');
+
+      container.style.transform = 'scale(1)';
+      setTimeout(() => {
+        container.style.transform = 'scale(1.05)';
+      }, 10);
+    });
+  });
+</script>
+
+</body>
+</html>
